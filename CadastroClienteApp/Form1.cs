@@ -13,7 +13,6 @@ namespace CadastroClienteApp
     public partial class Cadastro : Form
     {
         List<Clientes> clientes;
-
         public Cadastro()
         {
             InitializeComponent();
@@ -28,20 +27,12 @@ namespace CadastroClienteApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            int index = -1;
-
-            foreach (Clientes c in clientes)
-            {
-                if (c.Nome == txtNome.Text)
-                {
-                    index = clientes.IndexOf(c);
-                }
-            }
+            Clientes cliente = new Clientes(txtNome.Text, txtSobrenome.Text, txtTelefone.Text);
 
             if (txtNome.Text == "")
             {
@@ -57,34 +48,55 @@ namespace CadastroClienteApp
                 return;
             }
 
-            if (txtTelefone.Text == "")
+            if (txtTelefone.Text == "(  )      -")
             {
                 MessageBox.Show("Preencha todos os campos!");
                 txtTelefone.Focus();
                 return;
             }
+
+            MessageBox.Show(cliente.mensagem);
+
+            btnLimpar_Click(btnLimpar, EventArgs.Empty);
+
+            Listar();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-
+            //int indice = lista.SelectedIndex;
+            //clientes.RemoveAt(indice);
+            //Listar();
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-
+            txtNome.Text = "";
+            txtSobrenome.Text = "";
+            txtTelefone.Text = "";
+            txtNome.Focus();
         }
 
         private void Listar()
         {
             lista.Items.Clear();
             
-            foreach (Clientes c in clientes)
+            foreach (Clientes client in clientes)
             {
-                lista.Items.Add(c.Nome);
-                lista.Items.Add(c.Sobrenome);
-                lista.Items.Add(c.Telefone);
+                lista.Items.Add();
+                //lista.Items.Add(c.Sobrenome);
+                //lista.Items.Add(c.Telefone);
             }
+        }
+
+        private void lista_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int indice = lista.SelectedIndex;
+            Clientes client = clientes[indice];
+
+            client.;
+            //txtSobrenome.Text = client.ToString();
+            //txtTelefone.Text = client.ToString();
         }
     }
 }

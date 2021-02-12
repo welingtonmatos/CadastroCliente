@@ -1,10 +1,12 @@
-C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\bin\Debug\CadastroClienteApp.exe.config
-C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\bin\Debug\CadastroClienteApp.exe
-C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\bin\Debug\CadastroClienteApp.pdb
-C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.csprojAssemblyReference.cache
 C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.Cadastro.resources
 C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.Properties.Resources.resources
 C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.csproj.GenerateResource.cache
 C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.csproj.CoreCompileInputs.cache
+C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\bin\Debug\CadastroClienteApp.exe.config
+C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\bin\Debug\CadastroClienteApp.exe
+C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\bin\Debug\CadastroClienteApp.pdb
+C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\bin\Debug\MySql.Data.dll
+C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.csproj.CopyComplete
 C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.exe
 C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.pdb
+C:\Users\Welington\Documents\GitHub\CadastroCliente\CadastroClienteApp\obj\Debug\CadastroClienteApp.csprojAssemblyReference.cache

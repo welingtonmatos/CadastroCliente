@@ -29,6 +29,7 @@ namespace CadastroClienteApp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -146,6 +147,7 @@ namespace CadastroClienteApp
             this.lista.Name = "lista";
             this.lista.Size = new System.Drawing.Size(497, 134);
             this.lista.TabIndex = 10;
+            this.lista.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lista_MouseDoubleClick);
             // 
             // label5
             // 
@@ -161,7 +163,7 @@ namespace CadastroClienteApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 505);
+            this.ClientSize = new System.Drawing.Size(800, 518);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lista);
             this.Controls.Add(this.btnLimpar);
