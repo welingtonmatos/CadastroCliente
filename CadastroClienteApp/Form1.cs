@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace CadastroClienteApp
 {
     public partial class Cadastro : Form
     {
-        List<Clientes> clientes;
+        SqlConnection conexao;
+        SqlCommand comando;
+        SqlDataAdapter adapter;
+        SqlDataReader reader;
+        string strSQL;
+
         public Cadastro()
         {
             InitializeComponent();
-
-            clientes = new List<Clientes>();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -27,76 +31,174 @@ namespace CadastroClienteApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            Clientes cliente = new Clientes(txtNome.Text, txtSobrenome.Text, txtTelefone.Text);
-
-            if (txtNome.Text == "")
+            try
             {
-                MessageBox.Show("Preencha todos os campos!");
-                txtNome.Focus();
-                return;
-            }
+                conexao = new SqlConnection("Server=WELINGTON-PC;Database=bdClientes;User Id=sa;Password=welington;");
 
-            if (txtSobrenome.Text == "")
+                strSQL = "INSERT INTO clientes (id, nome, ddd, telefone) VALUES (@id, @nome, @ddd, @telefone)";
+
+                comando = new SqlCommand(strSQL, conexao);
+
+                comando.Parameters.AddWithValue("@id", txtId.Text);
+                comando.Parameters.AddWithValue("@nome", txtNome.Text);
+                comando.Parameters.AddWithValue("@ddd", txtDdd.Text);
+                comando.Parameters.AddWithValue("@telefone", txtTelefone.Text);
+
+                conexao.Open();
+                comando.ExecuteNonQuery();
+
+                MessageBox.Show("Cliente cadastrado com sucesso!");
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Preencha todos os campos!");
-                txtSobrenome.Focus();
-                return;
+                MessageBox.Show(ex.Message);
             }
-
-            if (txtTelefone.Text == "(  )      -")
+            finally
             {
-                MessageBox.Show("Preencha todos os campos!");
-                txtTelefone.Focus();
-                return;
+                conexao.Close();
+                conexao = null;
+                comando = null;
             }
-
-            MessageBox.Show(cliente.mensagem);
 
             btnLimpar_Click(btnLimpar, EventArgs.Empty);
-
-            Listar();
         }
 
-        private void btnExcluir_Click(object sender, EventArgs e)
+        private void btnAlterar_Click(object sender, EventArgs e)
         {
-            //int indice = lista.SelectedIndex;
-            //clientes.RemoveAt(indice);
-            //Listar();
+            try
+            {
+                conexao = new SqlConnection("Server=WELINGTON-PC;Database=bdClientes;User Id=sa;Password=welington;");
+
+                strSQL = "UPDATE clientes SET nome = @nome, ddd = @ddd, telefone = @telefone WHERE id = @id";
+
+                comando = new SqlCommand(strSQL, conexao);
+
+                comando.Parameters.AddWithValue("@id", txtId.Text);
+                comando.Parameters.AddWithValue("@nome", txtNome.Text);
+                comando.Parameters.AddWithValue("@ddd", txtDdd.Text);
+                comando.Parameters.AddWithValue("@telefone", txtTelefone.Text);
+
+                conexao.Open();
+                comando.ExecuteNonQuery();
+
+                MessageBox.Show("Cadastro alterado com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+                conexao = null;
+                comando = null;
+            }
+        }
+
+        private void btnExibir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conexao = new SqlConnection("Server=WELINGTON-PC;Database=bdClientes;User Id=sa;Password=welington;");
+
+                strSQL = "SELECT * FROM clientes";
+
+                DataSet data = new DataSet();
+
+                adapter = new SqlDataAdapter(strSQL, conexao);
+
+                conexao.Open();
+
+                adapter.Fill(data);
+
+                lista.DataSource = data.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+                conexao = null;
+                comando = null;
+            }
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conexao = new SqlConnection("Server=WELINGTON-PC;Database=bdClientes;User Id=sa;Password=welington;");
+
+                strSQL = "SELECT * FROM clientes WHERE id = @id";
+
+                comando = new SqlCommand(strSQL, conexao);
+
+                comando.Parameters.AddWithValue("@id", txtId.Text);
+
+                conexao.Open();
+                reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    txtNome.Text = (string)reader["nome"];
+                    txtDdd.Text = (string)reader["ddd"];
+                    txtTelefone.Text = (string)reader["telefone"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+                conexao = null;
+                comando = null;
+            }
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
+            txtId.Text = "";
             txtNome.Text = "";
-            txtSobrenome.Text = "";
+            txtDdd.Text = "";
             txtTelefone.Text = "";
-            txtNome.Focus();
         }
 
-        private void Listar()
+        private void btnExcluir_Click(object sender, EventArgs e)
         {
-            lista.Items.Clear();
-            
-            foreach (Clientes client in clientes)
+            try
             {
-                lista.Items.Add();
-                //lista.Items.Add(c.Sobrenome);
-                //lista.Items.Add(c.Telefone);
+                conexao = new SqlConnection("Server=WELINGTON-PC;Database=bdClientes;User Id=sa;Password=welington;");
+
+                strSQL = "DELETE clientes WHERE id = @id";
+
+                comando = new SqlCommand(strSQL, conexao);
+
+                comando.Parameters.AddWithValue("@id", txtId.Text);
+                
+                conexao.Open();
+                comando.ExecuteNonQuery();
+
+                MessageBox.Show("Cadastro exluído com sucesso!");
             }
-        }
-
-        private void lista_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            int indice = lista.SelectedIndex;
-            Clientes client = clientes[indice];
-
-            client.;
-            //txtSobrenome.Text = client.ToString();
-            //txtTelefone.Text = client.ToString();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexao.Close();
+                conexao = null;
+                comando = null;
+            }
         }
     }
 }
